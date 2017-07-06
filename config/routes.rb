@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :greeting, only: [:new,:show]
+  resources :greetings, only: [:new,:show]
 end
