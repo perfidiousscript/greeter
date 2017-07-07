@@ -4,7 +4,6 @@ class GreetingsController < ApplicationController
 
 
   def new
-    byebug
     @greeting = Greeting.new
   end
 
@@ -14,12 +13,22 @@ class GreetingsController < ApplicationController
   private
 
   def load_json
-    @companies = find_file('Companies')
-    @guests = find_file('Guests')
+    companies = find_file('Companies')
+    guests = find_file('Guests')
+    @companies = []
+    @guests = []
+
+    companies.each do |company|
+      @companies.push(Company.new(company))
+    end
+    guests.each do |guest|
+      @guests.push(Guest.new(guest))
+    end
+
+    byebug
   end
 
   def find_file(file_name)
     JSON.parse(File.read(File.join(Rails.root, 'docs', "#{file_name}.json")))
   end
-
 end

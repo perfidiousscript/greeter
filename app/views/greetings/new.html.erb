@@ -1,5 +1,13 @@
 <div id="main-container" class="container">
-  <%= form_for @greeting do |f| %>
+  <%= form_for @greeting, url: {action: "create"} do |f| %>
+    <%= f.label :company %>
+    <%= f.select_tag "company",
+                     options_from_collection_for_select(@companies,
+                                                        "id",
+                                                        "company"
+                                                        )
+    %>
+
     <% end %>
 
 </div>
