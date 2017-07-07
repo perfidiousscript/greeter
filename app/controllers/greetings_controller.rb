@@ -2,12 +2,11 @@
 class GreetingsController < ApplicationController
   before_action :load_json
 
-
   def new
     @greeting = Greeting.new
   end
 
-  def create
+  def display
   end
 
   private
@@ -15,6 +14,7 @@ class GreetingsController < ApplicationController
   def load_json
     companies = find_file('Companies')
     guests = find_file('Guests')
+
     @companies = []
     @guests = []
 
@@ -24,8 +24,6 @@ class GreetingsController < ApplicationController
     guests.each do |guest|
       @guests.push(Guest.new(guest))
     end
-
-    byebug
   end
 
   def find_file(file_name)

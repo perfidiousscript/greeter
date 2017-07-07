@@ -1,6 +1,14 @@
 class Guest
   include ActiveModel::Model
+  extend ActiveModel::Callbacks
 
-  attr_accessor :id, :firstName, :lastName, :reservation
+  validates :id, :firstName, :lastName, :reservation, presence: true
 
+  attr_accessor :id, :firstName, :lastName, :reservation, :fullName
+
+  def fullName
+    "#{firstName} #{lastName}"
+  end
+
+  private
 end

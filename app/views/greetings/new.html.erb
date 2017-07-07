@@ -1,13 +1,19 @@
 <div id="main-container" class="container">
-  <%= form_for @greeting, url: {action: "create"} do |f| %>
+  <%= form_for @greeting, url: greetings_display_path(@greeting) do |f| %>
     <%= f.label :company %>
     <%= f.select_tag "company",
                      options_from_collection_for_select(@companies,
-                                                        "id",
-                                                        "company"
+                                                        :id,
+                                                        :company
                                                         )
     %>
-
+    <%= f.select_tag "guest",
+                     options_from_collection_for_select(@guests,
+                                                        :id,
+                                                        :fullName
+                                                        )
+    %>
+    <%= submit_tag "Create Greeting" %>
     <% end %>
 
 </div>
