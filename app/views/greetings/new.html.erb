@@ -1,5 +1,5 @@
 <div id="main-container" class="container">
-  <%= form_for @greeting, url: greetings_display_path(@greeting) do |f| %>
+  <%= form_for :greeting, url: greetings_display_path, method: "post" do |f| %>
     <%= f.label :company %>
     <%= f.select_tag "company",
                      options_from_collection_for_select(@companies,
@@ -7,13 +7,17 @@
                                                         :company
                                                         )
     %>
+    <%= f.label :guest %>
     <%= f.select_tag "guest",
                      options_from_collection_for_select(@guests,
                                                         :id,
                                                         :fullName
                                                         )
     %>
+    <%= f.label :template %>
+    <%= f.text_field_tag :template, @default_template %>
+
     <%= submit_tag "Create Greeting" %>
-    <% end %>
+  <% end %>
 
 </div>
