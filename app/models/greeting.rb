@@ -28,6 +28,8 @@ class Greeting
                                  .gsub(/firstName/, name_value)
                                  .gsub(/location/, location_value)
                                  .gsub(/roomNumber/, room_value.to_s)
+                                 .gsub(/lastName/, @guest.lastName)
+                                 .gsub(/city/, @company.city)
   end
 
   # Converts time and local timezone to a greeting. Since Ruby does not have US/Pacific

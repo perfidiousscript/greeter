@@ -1,4 +1,4 @@
-<div id="main-container" class="container">
+<div id="main-container" class="container col-md-offset-2 col-md-8">
   <%= form_for :greeting, url: greetings_display_path, method: "post", html: {class:"form-group"} do |f| %>
     <%= f.label :company, class: "col-2 col-form-label" %>
     <%= f.select_tag "company",

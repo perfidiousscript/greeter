@@ -21,7 +21,7 @@ RSpec.describe Greeting, type: :model do
   describe 'get_time' do
     context 'with US/Western TZ' do
       it 'should return a greeting' do
-        expect(greeting.get_time("US/Western")).to eq("Good Morning"||"Good Evening"||"Good Night")
+        expect(greeting.get_time("US/Western")).to match("Good ")
       end
     end
     context 'vastly different TZs should return vastly different greetings' do
@@ -32,10 +32,10 @@ RSpec.describe Greeting, type: :model do
   end
   describe 'compose_greeting' do
     let(:greeting) { Greeting.new({company: '1', guest: '1', template: Greeting::DEFAULT_TEMPLATE}) }
-    let(:formatted_greeting) {"Good Morning Candy, and welcome to Hotel California! Room 529 is now ready for you. Enjoy your stay and let us know if you need anything!"}
+    let(:formatted_greeting) {"Candy, and welcome to Hotel California! Room 529 is now ready for you. Enjoy your stay and let us know if you need anything!"}
     context 'with a valid user' do
       it 'should work' do
-        expect(greeting.compose_greeting).to eq(formatted_greeting)
+        expect(greeting.compose_greeting).to match(formatted_greeting)
       end
     end
   end
