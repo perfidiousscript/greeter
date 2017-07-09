@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 class GreetingsController < ApplicationController
+  include FileLoad
   before_action :load_json
 
   def new
@@ -10,35 +11,15 @@ class GreetingsController < ApplicationController
 
   def display
     @greeting = Greeting.new(greeting_params)
-    template_diff = @greeting.check_template
-    unless template_diff.empty?
-      flash[:notice] = "Custom template must contain #{template_diff}"
+    if @greeting.template != Greeting::DEFAULT_TEMPLATE && !@greeting.valid?
+      flash[:notice] = "Error: #{@greeting.errors.messages}"
       redirect_back fallback_location: new_greeting_path
       return
     end
-    @processed_greeting = @greeting.process
+    @processed_greeting = @greeting.compose_greeting
   end
 
   private
-
-  def load_json
-    companies = find_file('Companies')
-    guests = find_file('Guests')
-
-    @companies = []
-    @guests = []
-
-    companies.each do |company|
-      @companies.push(Company.new(company))
-    end
-    guests.each do |guest|
-      @guests.push(Guest.new(guest))
-    end
-  end
-
-  def find_file(file_name)
-    JSON.parse(File.read(File.join(Rails.root, 'docs', "#{file_name}.json")))
-  end
 
   def greeting_params
     params.permit(:company, :guest, :template)
