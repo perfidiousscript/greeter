@@ -20,7 +20,7 @@
 
 am most familiar with right now.
 
-Writing the program as a Rails app introduced a bit of overhead,
+  Writing the program as a Rails app introduced a bit of overhead,
 
 but allowed for an easy GUI and eased a few other things.
 
@@ -28,19 +28,21 @@ I tried to follow MVC as closely as possible, and Rails makes this easy.
 
 The most relevant files are 'app/controller/greetings_controller.rm',
 
-'app/models/greeting.rb' and the 'app/views/greetings' folder.
+'app/models/greeting.rb' and the 'app/views/greetings' folder. JSON files
 
-Rails generally assumes that you have a db running,
+are stored in the docs folder.
+
+  Rails generally assumes that you have a db running,
 
 but since that seemed unnecessary for this project I had to do some non-standard
 
-stuff especially around pulling in the JSON files.
+stuff especially around modeling the data in the JSON files.
 
 Normally each guest and customer would be instantiated as an instance of their
 
-respective models and saved in the db,
+respective models and saved in the db,allowing them to be searched et c.
 
-allowing them to be searched et c. Since I could not save them to the db I was
+Since I could not save them to the db I was
 
 forced to reread them from json each time I needed to use them.
 
@@ -67,3 +69,9 @@ of a few lines to the controllers.
 these tests yourself by running '$ rspec' in the command line.
 
 Green dots are good, red dots are bad. Tests are located in the spec folder.
+
+## Further work
+
+  The UI could be spruced up a bit and there could be a lot more testing and
+
+hardening for edge cases, more variables et c. 

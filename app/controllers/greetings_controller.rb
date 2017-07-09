@@ -6,12 +6,12 @@ class GreetingsController < ApplicationController
   before_action :load_json
 
   def new
-    @default_template = Greeting::DEFAULT_TEMPLATE.to_s
+    @default_template = @template['template']
   end
 
   def display
     @greeting = Greeting.new(greeting_params)
-    if @greeting.template != Greeting::DEFAULT_TEMPLATE && !@greeting.valid?
+    unless @greeting.valid?
       flash[:notice] = "Error: #{@greeting.errors.messages}"
       redirect_back fallback_location: new_greeting_path
       return

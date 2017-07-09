@@ -6,16 +6,13 @@ class Greeting
   validates :company, :guest, :template, presence: true
   validate :template, :check_template
 
-
   attr_accessor :company, :guest, :template
-
-  DEFAULT_TEMPLATE = 'time firstName, and welcome to location! Room roomNumber is now ready for you. Enjoy your stay and let us know if you need anything!'
 
   def initialize(greeting_hash)
     load_json
-    @company = @companies[greeting_hash[:company].to_i-1]
-    @guest = @guests[greeting_hash[:guest].to_i-1]
-    @template = greeting_hash[:template] || DEFAULT_TEMPLATE
+    @company = @companies[greeting_hash[:company].to_i - 1]
+    @guest = @guests[greeting_hash[:guest].to_i - 1]
+    @template = greeting_hash[:template]
   end
 
   # Inserts the selected values into the template.
@@ -35,21 +32,21 @@ class Greeting
   # Converts time and local timezone to a greeting. Since Ruby does not have US/Pacific
   # I need to manually coerce the US/Pacific timezone.
   def get_time(pre_format_timezone)
-    timezone = (pre_format_timezone == "US/Western") ? "US/Pacific" : pre_format_timezone
+    timezone = pre_format_timezone == 'US/Western' ? 'US/Pacific' : pre_format_timezone
     local_hour = Time.current.in_time_zone(timezone).hour
     case local_hour
     when 0..11
-        "Good Morning"
-      when 12..18
-        "Good Afternoon"
-      when 19..23
-        "Good Evening"
-      else
-        "Hello"
+      'Good Morning'
+    when 12..18
+      'Good Afternoon'
+    when 19..23
+      'Good Evening'
+    else
+      'Hello'
     end
   end
 
-  # Checks the template for all the template pieces.
+  # Checks the template for basic template pieces.
   # Returns 'diff array' which is an array of any missing template pieces
   # An empty array signifies a passing custom template
   def check_template

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FileLoad
   extend ActiveSupport::Concern
 
@@ -7,6 +9,8 @@ module FileLoad
 
     @companies = []
     @guests = []
+
+    @template = find_file('Template')
 
     companies.each do |company|
       @companies.push(Company.new(company))
