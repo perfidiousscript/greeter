@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Guest
   include ActiveModel::Model
   extend ActiveModel::Callbacks

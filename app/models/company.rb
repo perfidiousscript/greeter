@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Company
-   include ActiveModel::Model
+  include ActiveModel::Model
 
-   validates :id, :company, :city, :timezone, presence: true
+  validates :id, :company, :city, :timezone, presence: true
 
-   attr_accessor :id, :company, :city, :timezone
+  attr_accessor :id, :company, :city, :timezone
  end

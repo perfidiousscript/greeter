@@ -1,9 +1,10 @@
 
+# frozen_string_literal: true
+
 class GreetingsController < ApplicationController
   before_action :load_json
 
   def new
-    @greeting = Greeting.new
     @default_template = Greeting::DEFAULT_TEMPLATE.to_s
   end
 
