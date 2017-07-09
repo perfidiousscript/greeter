@@ -9,7 +9,7 @@ class Greeting
 
   attr_accessor :company, :guest, :template
 
-  DEFAULT_TEMPLATE = 'time name, and welcome to location! room is now ready for you. Enjoy your stay and let us know if you need anything!'
+  DEFAULT_TEMPLATE = 'time firstName, and welcome to location! Room roomNumber is now ready for you. Enjoy your stay and let us know if you need anything!'
 
   def initialize(greeting_hash)
     load_json
@@ -18,8 +18,16 @@ class Greeting
     @template = greeting_hash[:template] || DEFAULT_TEMPLATE
   end
 
+  # Inserts the selected values into the template.
   def compose_greeting
-    time = get_time(company.timezone)
+    greeting_value = get_time(company.timezone)
+    name_value = @guest.firstName
+    location_value = @company.company
+    room_value = @guest.reservation['roomNumber']
+    composed_template = @template.gsub(/time/, greeting_value)
+                                 .gsub(/firstName/, name_value)
+                                 .gsub(/location/, location_value)
+                                 .gsub(/roomNumber/, room_value.to_s)
   end
 
   # Converts time and local timezone to a greeting. Since Ruby does not have US/Pacific
@@ -28,9 +36,9 @@ class Greeting
     timezone = (pre_format_timezone == "US/Western") ? "US/Pacific" : pre_format_timezone
     local_hour = Time.current.in_time_zone(timezone).hour
     case local_hour
-      when 0..12
+    when 0..11
         "Good Morning"
-      when 13..18
+      when 12..18
         "Good Afternoon"
       when 19..23
         "Good Evening"
@@ -43,7 +51,7 @@ class Greeting
   # Returns 'diff array' which is an array of any missing template pieces
   # An empty array signifies a passing custom template
   def check_template
-    template_array = %w[time name location room]
+    template_array = %w[time firstName location roomNumber]
     regex_union = Regexp.union(template_array)
     contents_array = template.scan(regex_union)
     diff_array = template_array - contents_array

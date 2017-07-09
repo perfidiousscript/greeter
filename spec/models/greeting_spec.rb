@@ -14,7 +14,7 @@ RSpec.describe Greeting, type: :model do
     context 'with a bad template' do
       it 'should return and array of missing placeholders' do
         greeting.template = 'this is a bad template'
-        expect(greeting.check_template).to eq(["must contain [\"time\", \"name\", \"location\", \"room\"]"])
+        expect(greeting.check_template).to eq(["must contain [\"time\", \"firstName\", \"location\", \"roomNumber\"]"])
       end
     end
   end
@@ -26,7 +26,16 @@ RSpec.describe Greeting, type: :model do
     end
     context 'vastly different TZs should return vastly different greetings' do
       it 'should return a greeting' do
-        expect(greeting.get_time("US/Western")).to_not eq(greeting.get_time("Indian/Chagos"))
+        expect(greeting.get_time("US/Western")).to_not eq(greeting.get_time("Asia/Baku"))
+      end
+    end
+  end
+  describe 'compose_greeting' do
+    let(:greeting) { Greeting.new({company: '1', guest: '1', template: Greeting::DEFAULT_TEMPLATE}) }
+    let(:formatted_greeting) {"Good Morning Candy, and welcome to Hotel California! Room 529 is now ready for you. Enjoy your stay and let us know if you need anything!"}
+    context 'with a valid user' do
+      it 'should work' do
+        expect(greeting.compose_greeting).to eq(formatted_greeting)
       end
     end
   end
