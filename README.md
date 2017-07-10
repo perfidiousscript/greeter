@@ -4,9 +4,7 @@
 
 ## instructions
 
-1. To run the app you will need ruby 2.4.0 installed or you may install ruby version manager:
-
-https://rvm.io/
+1. To run the app you will need ruby 2.4.0 installed which you can install with the ruby version manager: https://rvm.io/
 
 2. Run '$ bundle install' in the command line, this will install all dependencies and should take 5-10 minutes.
 
@@ -24,13 +22,13 @@ am most familiar with right now.
 
   Writing the program as a Rails app introduced a bit of boilerplate,
 
-but allowed for an easy GUI and eased a few other things.
+but allowed for an easy GUI and eased a few other things along.
 
 I tried to follow MVC as closely as possible, and Rails makes this easy.
 
 The most interesting files are 'app/controller/greetings_controller.rm',
 
-'app/models/greeting.rb' and the 'app/views/greetings' folder. JSON files
+'app/models/greeting.rb', lib/info_load.rb' and the 'app/views/greetings' folder. JSON files
 
 are stored in the docs folder.
 
@@ -52,17 +50,13 @@ This isn't a problem here, but would be slow with sufficiently large json files.
 
   I decided to put a check in for the four template values that were in the pdf
 
-greeting, and allowed for two optional template values for lastName and the
+since they seem to be the basic elements of a meaningful greeting, and allowed
 
-Company city.
+for two optional template values for lastName and the Company city.
 
   I put in two routes for the greeting: '/new' and '/display' in an attempt to
 
 follow REST.
-
-This app could pretty easily be converted to a GUI-less API with the addition
-
-of a few lines to the controllers.
 
 ## Code verification
 
@@ -80,4 +74,6 @@ hardening for edge cases, more variables et c. Doing something like highlighting
 
 the template values in the text box would be cool also generating multiple
 
-greetings from an array could be useful.
+greetings from an array could be useful. This app could pretty easily be
+
+converted to a GUI-less API with the addition of a few lines to the controllers.
