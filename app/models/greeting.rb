@@ -2,16 +2,16 @@
 
 class Greeting
   include ActiveModel::Model
-  include FileLoad
+  #include FileLoad
   validates :company, :guest, :template, presence: true
   validate :template, :check_template
 
   attr_accessor :company, :guest, :template
 
   def initialize(greeting_hash)
-    load_json
-    @company = @companies[greeting_hash[:company].to_i - 1]
-    @guest = @guests[greeting_hash[:guest].to_i - 1]
+    InfoLoad.load_json
+    @company = InfoLoad.companies[greeting_hash[:company].to_i - 1]
+    @guest = InfoLoad.guests[greeting_hash[:guest].to_i - 1]
     @template = greeting_hash[:template]
   end
 

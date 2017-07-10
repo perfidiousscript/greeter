@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class GreetingsController < ApplicationController
-  include FileLoad
+  #include FileLoad
   before_action :load_json
 
   def new
@@ -23,5 +23,12 @@ class GreetingsController < ApplicationController
 
   def greeting_params
     params.permit(:company, :guest, :template)
+  end
+
+  def load_json
+    InfoLoad.load_json
+    @companies = InfoLoad.companies
+    @guests = InfoLoad.guests
+    @template = InfoLoad.template
   end
 end

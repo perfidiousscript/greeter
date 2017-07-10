@@ -4,9 +4,11 @@
 
 ## instructions
 
-1. To run the app you will need to first install ruby version manager: https://rvm.io/
+1. To run the app you will need ruby 2.4.0 installed or you may install ruby version manager:
 
-2. Clone the project and run '$ bundle install' in the command line, this will install all dependencies and should take 5-10 minutes.
+https://rvm.io/
+
+2. Run '$ bundle install' in the command line, this will install all dependencies and should take 5-10 minutes.
 
 3. Once you have everything installed run '$ rails s' to start the server.
 
@@ -20,13 +22,13 @@
 
 am most familiar with right now.
 
-  Writing the program as a Rails app introduced a bit of overhead,
+  Writing the program as a Rails app introduced a bit of boilerplate,
 
 but allowed for an easy GUI and eased a few other things.
 
 I tried to follow MVC as closely as possible, and Rails makes this easy.
 
-The most relevant files are 'app/controller/greetings_controller.rm',
+The most interesting files are 'app/controller/greetings_controller.rm',
 
 'app/models/greeting.rb' and the 'app/views/greetings' folder. JSON files
 
@@ -40,7 +42,7 @@ stuff especially around modeling the data in the JSON files.
 
 Normally each guest and customer would be instantiated as an instance of their
 
-respective models and saved in the db,allowing them to be searched et c.
+respective models and saved in the db, allowing them to be searched et c.
 
 Since I could not save them to the db I was
 
@@ -54,7 +56,7 @@ greeting, and allowed for two optional template values for lastName and the
 
 Company city.
 
-  I put in two routes for the greeting: /new and /display in an attempt to
+  I put in two routes for the greeting: '/new' and '/display' in an attempt to
 
 follow REST.
 
@@ -74,4 +76,8 @@ Green dots are good, red dots are bad. Tests are located in the spec folder.
 
   The UI could be spruced up a bit and there could be a lot more testing and
 
-hardening for edge cases, more variables et c. 
+hardening for edge cases, more variables et c. Doing something like highlighting
+
+the template values in the text box would be cool also generating multiple
+
+greetings from an array could be useful.
